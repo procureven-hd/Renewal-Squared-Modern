@@ -721,6 +721,35 @@ function About() {
 }
 
 function Contact() {
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("sending");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ firstName, lastName, email, message }),
+      });
+
+      if (!res.ok) throw new Error("Failed to send");
+
+      setStatus("sent");
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setMessage("");
+    } catch {
+      setStatus("error");
+    }
+  };
+
   return (
     <section id="contact" className="border-t" data-testid="section-contact">
       <div className="rsq-container py-14 sm:py-20">
@@ -729,7 +758,7 @@ function Contact() {
             <SectionHeading
               eyebrow="Contact"
               title="Let’s bring textile reuse to your community."
-              description="Send a message and we’ll follow up. (This mockup doesn’t send email yet—just a polished UI for now.)"
+              description="Send a message and we’ll follow up."
             />
 
             <div className="mt-8 grid gap-4" data-testid="contact-details">
@@ -749,39 +778,46 @@ function Contact() {
           <div className="lg:col-span-7">
             <Card className="rsq-card rounded-3xl p-6 sm:p-7" data-testid="card-contact-form">
               <form
-                onSubmit={(e) => e.preventDefault()}
+                onSubmit={handleSubmit}
                 className="grid gap-4"
                 data-testid="form-contact"
               >
                 <div className="grid gap-4 sm:grid-cols-2" data-testid="grid-name">
                   <div data-testid="field-first-name">
                     <label className="text-sm text-foreground/80" data-testid="label-first-name">First name</label>
-                    <Input className="mt-2 h-11 rounded-xl" placeholder="First" data-testid="input-first-name" />
+                    <Input className="mt-2 h-11 rounded-xl" placeholder="First" value={firstName} onChange={(e) => setFirstName(e.target.value)} required data-testid="input-first-name" />
                   </div>
                   <div data-testid="field-last-name">
                     <label className="text-sm text-foreground/80" data-testid="label-last-name">Last name</label>
-                    <Input className="mt-2 h-11 rounded-xl" placeholder="Last" data-testid="input-last-name" />
+                    <Input className="mt-2 h-11 rounded-xl" placeholder="Last" value={lastName} onChange={(e) => setLastName(e.target.value)} data-testid="input-last-name" />
                   </div>
                 </div>
 
                 <div data-testid="field-email">
                   <label className="text-sm text-foreground/80" data-testid="label-email">Email</label>
-                  <Input className="mt-2 h-11 rounded-xl" placeholder="you@organization.org" type="email" data-testid="input-email" />
+                  <Input className="mt-2 h-11 rounded-xl" placeholder="you@organization.org" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required data-testid="input-email" />
                 </div>
 
                 <div data-testid="field-message">
                   <label className="text-sm text-foreground/80" data-testid="label-message">Message</label>
-                  <Textarea className="mt-2 min-h-[120px] rounded-xl" placeholder="Tell us about your community or organization…" data-testid="input-message" />
+                  <Textarea className="mt-2 min-h-[120px] rounded-xl" placeholder="Tell us about your community or organization…" value={message} onChange={(e) => setMessage(e.target.value)} required data-testid="input-message" />
                 </div>
 
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between" data-testid="row-submit">
-                  <Button className="h-11 rounded-xl px-5" type="submit" data-testid="button-submit">
-                    Submit
+                  <Button className="h-11 rounded-xl px-5" type="submit" disabled={status === "sending"} data-testid="button-submit">
+                    {status === "sending" ? "Sending…" : "Submit"}
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
-                  <div className="text-sm text-muted-foreground" data-testid="status-form">
-                    Thanks for submitting! (mock)
-                  </div>
+                  {status === "sent" && (
+                    <div className="text-sm text-primary" data-testid="status-form">
+                      Message sent! We’ll be in touch.
+                    </div>
+                  )}
+                  {status === "error" && (
+                    <div className="text-sm text-destructive" data-testid="status-form">
+                      Something went wrong. Please try again.
+                    </div>
+                  )}
                 </div>
               </form>
             </Card>
