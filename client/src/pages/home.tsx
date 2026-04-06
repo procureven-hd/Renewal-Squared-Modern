@@ -21,7 +21,7 @@ import {
 import heroTexture from "@/assets/images/rsq-hero-texture.png";
 import binPhoto from "@/assets/images/rsq-bin-attached.png";
 import logoMark from "@/assets/images/rsq-logo.png";
-import mapPlaceholder from "@/assets/images/rsq-map-placeholder.png";
+import { BinMap } from "@/components/bin-map";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -535,34 +535,12 @@ function Partnerships() {
                   </div>
                 </div>
                 <p className="mt-2 max-w-2xl text-sm text-muted-foreground" data-testid="text-locations-desc">
-                  Placeholder for the dynamic map. This will become an interactive map with pins + a location drawer.
+                  Find a clothing donation bin near you. Search by address to locate the closest drop-off point.
                 </p>
               </div>
-              <Button variant="secondary" className="h-11 rounded-xl" data-testid="button-locations">
-                View map
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
             </div>
 
-            <div className="rsq-card overflow-hidden rounded-3xl" data-testid="map-placeholder">
-              <div className="relative" data-testid="map-placeholder-inner">
-                <img
-                  src={mapPlaceholder}
-                  alt="Map preview placeholder"
-                  className="h-[360px] w-full object-cover sm:h-[420px]"
-                  data-testid="img-map-placeholder"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/75 via-transparent to-transparent" aria-hidden="true" />
-                <div className="absolute left-4 top-4 flex items-center gap-2" data-testid="map-badges">
-                  <div className="rounded-full border bg-card/70 px-3 py-1 text-xs text-foreground shadow-xs backdrop-blur" data-testid="badge-map-status">
-                    Map (placeholder)
-                  </div>
-                  <div className="rounded-full border bg-card/70 px-3 py-1 text-xs text-muted-foreground shadow-xs backdrop-blur" data-testid="badge-map-note">
-                    Dynamic pins coming next
-                  </div>
-                </div>
-              </div>
-            </div>
+            <BinMap />
           </div>
         </div>
       </div>
