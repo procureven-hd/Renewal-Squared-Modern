@@ -180,39 +180,6 @@ function Nav() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <div className="hidden items-center gap-2 md:flex" data-testid="header-social">
-            <a
-              className="rsq-focus inline-flex h-10 w-10 items-center justify-center rounded-xl border bg-card shadow-xs hover-elevate"
-              href="https://www.instagram.com/wix"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Instagram"
-              data-testid="link-header-instagram"
-            >
-              <Instagram className="h-5 w-5" strokeWidth={2} />
-            </a>
-            <a
-              className="rsq-focus inline-flex h-10 w-10 items-center justify-center rounded-xl border bg-card shadow-xs hover-elevate"
-              href="https://www.linkedin.com/company/wix-com"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="LinkedIn"
-              data-testid="link-header-linkedin"
-            >
-              <Linkedin className="h-5 w-5" strokeWidth={2} />
-            </a>
-            <a
-              className="rsq-focus inline-flex h-10 w-10 items-center justify-center rounded-xl border bg-card shadow-xs hover-elevate"
-              href="https://www.facebook.com/wix"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Facebook"
-              data-testid="link-header-facebook"
-            >
-              <Facebook className="h-5 w-5" strokeWidth={2} />
-            </a>
-          </div>
-
           <button
             type="button"
             onClick={toggle}
