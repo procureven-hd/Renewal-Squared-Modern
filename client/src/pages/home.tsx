@@ -300,7 +300,7 @@ function Hero() {
             >
               Clothing reuse and recycling, built around communities.
             </h1>
-            <p className="mt-4 max-w-xl text-base text-muted-foreground" data-testid="text-hero-subtitle">
+            <p className="mt-4 max-w-xl text-lg text-muted-foreground" data-testid="text-hero-subtitle">
               We partner with municipalities, retail businesses, educational institutions, and non-profit organizations to implement
               community-driven clothing collection initiatives—and to help grow a circular economy mindset.
             </p>
@@ -363,13 +363,13 @@ function Hero() {
                         <div className="font-serif text-xl font-semibold" data-testid="text-mission-title">
                           Mission
                         </div>
-                        <div className="text-sm text-muted-foreground" data-testid="text-mission-kicker">
+                        <div className="text-base text-muted-foreground" data-testid="text-mission-kicker">
                           Better systems, less waste.
                         </div>
                       </div>
                     </div>
 
-                    <p className="mt-5 text-sm text-muted-foreground" data-testid="text-mission-body">
+                    <p className="mt-5 text-base text-muted-foreground" data-testid="text-mission-body">
                       Reducing the amount of clothing and textiles ending up in landfills. We will leave the world a better place than we inherited it.
                     </p>
 
@@ -381,7 +381,7 @@ function Hero() {
                           data-testid={`row-mission-${t.toLowerCase().replace(/\s+/g, "-")}`}
                         >
                           <ShieldCheck className="mt-0.5 h-5 w-5 text-primary" strokeWidth={2.25} />
-                          <div className="text-sm" data-testid={`text-mission-${t}`}>
+                          <div className="text-base" data-testid={`text-mission-${t}`}>
                             {t}
                           </div>
                         </div>
@@ -442,7 +442,7 @@ function WhatWeDo() {
                     {c.title}
                   </div>
                 </div>
-                <p className="mt-3 text-sm text-muted-foreground" data-testid="what-card-body">
+                <p className="mt-3 text-base text-muted-foreground" data-testid="what-card-body">
                   {c.body}
                 </p>
               </Card>
@@ -476,7 +476,7 @@ function Partnerships() {
                   {p.title}
                 </div>
               </div>
-              <ul className="mt-4 space-y-3 text-sm text-muted-foreground" data-testid={`list-partner-${p.title}`}>
+              <ul className="mt-4 space-y-3 text-base text-muted-foreground" data-testid={`list-partner-${p.title}`}>
                 {p.points.map((pt, idx) => (
                   <li key={idx} className="flex gap-3" data-testid={`item-partner-${p.title}-${idx}`}>
                     <span className="mt-1 inline-block h-2 w-2 rounded-full bg-primary/70" aria-hidden="true" />
@@ -498,7 +498,7 @@ function Partnerships() {
                     Our bin locations
                   </div>
                 </div>
-                <p className="mt-2 max-w-2xl text-sm text-muted-foreground" data-testid="text-locations-desc">
+                <p className="mt-2 max-w-2xl text-base text-muted-foreground" data-testid="text-locations-desc">
                   Find a clothing donation bin near you. Search by address to locate the closest drop-off point.
                 </p>
               </div>
@@ -544,7 +544,7 @@ function HowItWorks() {
                 {c.title}
               </div>
             </div>
-            <p className="mt-3 text-sm text-muted-foreground" data-testid="pathway-body">
+            <p className="mt-3 text-base text-muted-foreground" data-testid="pathway-body">
               {c.body}
             </p>
           </Card>
@@ -560,7 +560,7 @@ function HowItWorks() {
             <div className="font-serif text-lg font-semibold" data-testid="market-title">
               Market conditions matter
             </div>
-            <p className="mt-1 text-sm text-muted-foreground" data-testid="market-body">
+            <p className="mt-1 text-base text-muted-foreground" data-testid="market-body">
               Destinations fluctuate based on demand, item quality, seasonal trends, and worldwide economic influences. The focus stays the same: keep textiles in use.
             </p>
           </div>
@@ -631,7 +631,7 @@ function AcceptedItems() {
                   <ShieldCheck className="h-4 w-4" strokeWidth={2.25} />
                 )}
               </div>
-              <div className="text-sm" data-testid={`text-item-${tab}-${idx}`}>{t}</div>
+              <div className="text-base" data-testid={`text-item-${tab}-${idx}`}>{t}</div>
             </div>
           ))}
         </div>
@@ -711,7 +711,7 @@ function About() {
                   <Leaf className="h-5 w-5 text-primary" strokeWidth={2.25} />
                 </div>
               </div>
-              <p className="mt-3 text-sm text-muted-foreground" data-testid="team-bio">{p.bio}</p>
+              <p className="mt-3 text-base text-muted-foreground" data-testid="team-bio">{p.bio}</p>
             </div>
           ))}
         </div>
