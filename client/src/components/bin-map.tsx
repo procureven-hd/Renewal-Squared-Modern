@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   APIProvider,
   Map,
@@ -26,6 +26,16 @@ function MapContent() {
   const [selectedBin, setSelectedBin] = useState<BinLocation | null>(null);
   const [selectedDistance, setSelectedDistance] = useState<number | undefined>();
   const [panelOpen, setPanelOpen] = useState(false);
+  const hasFitBounds = useRef(false);
+
+  // Fit map to show all bins once they load
+  useEffect(() => {
+    if (!map || !bins.length || hasFitBounds.current) return;
+    const bounds = new google.maps.LatLngBounds();
+    bins.forEach((bin) => bounds.extend({ lat: bin.lat, lng: bin.lng }));
+    map.fitBounds(bounds, { top: 40, right: 40, bottom: 40, left: 40 });
+    hasFitBounds.current = true;
+  }, [map, bins]);
 
   const handleMarkerClick = useCallback(
     (bin: BinLocation) => {
