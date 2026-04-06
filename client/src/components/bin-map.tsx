@@ -3,6 +3,7 @@ import {
   APIProvider,
   Map,
   AdvancedMarker,
+  Marker,
   Pin,
   useMap,
 } from "@vis.gl/react-google-maps";
@@ -82,7 +83,7 @@ function MapContent() {
         <Map
           defaultCenter={DEFAULT_CENTER}
           defaultZoom={DEFAULT_ZOOM}
-          mapId={MAP_ID}
+          mapId={MAP_ID || undefined}
           gestureHandling="cooperative"
           disableDefaultUI={false}
           zoomControl={true}
@@ -91,20 +92,29 @@ function MapContent() {
           mapTypeControl={false}
           className="h-full w-full"
         >
-          {bins.map((bin) => (
-            <AdvancedMarker
-              key={bin.id}
-              position={{ lat: bin.lat, lng: bin.lng }}
-              title={bin.name}
-              onClick={() => handleMarkerClick(bin)}
-            >
-              <Pin
-                background="#16a34a"
-                glyphColor="#fff"
-                borderColor="#15803d"
+          {bins.map((bin) =>
+            MAP_ID ? (
+              <AdvancedMarker
+                key={bin.id}
+                position={{ lat: bin.lat, lng: bin.lng }}
+                title={bin.name}
+                onClick={() => handleMarkerClick(bin)}
+              >
+                <Pin
+                  background="#16a34a"
+                  glyphColor="#fff"
+                  borderColor="#15803d"
+                />
+              </AdvancedMarker>
+            ) : (
+              <Marker
+                key={bin.id}
+                position={{ lat: bin.lat, lng: bin.lng }}
+                title={bin.name}
+                onClick={() => handleMarkerClick(bin)}
               />
-            </AdvancedMarker>
-          ))}
+            ),
+          )}
         </Map>
         <AddressSearch onPlaceSelect={handlePlaceSelect} />
       </div>
