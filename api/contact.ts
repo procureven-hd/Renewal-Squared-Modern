@@ -16,7 +16,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     await resend.emails.send({
-      from: "Renewal Squared Website <noreply@renewalsquared.com>",
+      from: "Renewal Squared Website <onboarding@resend.dev>",
       to: "darrylmccaw@renewalsquared.com",
       replyTo: email,
       subject: `New contact form submission from ${firstName} ${lastName || ""}`.trim(),
