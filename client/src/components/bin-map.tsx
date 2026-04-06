@@ -9,8 +9,7 @@ import {
 } from "@vis.gl/react-google-maps";
 import { Loader2 } from "lucide-react";
 import { useBinLocations } from "@/hooks/use-bin-locations";
-import { findClosestBins, type BinLocation } from "@/lib/bin-locations";
-import { AddressSearch } from "./address-search";
+import type { BinLocation } from "@/lib/bin-locations";
 import { BinDetailPanel } from "./bin-detail-panel";
 
 const API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "";
@@ -47,27 +46,6 @@ function MapContent() {
     [map],
   );
 
-  const handlePlaceSelect = useCallback(
-    (location: { lat: number; lng: number }) => {
-      if (!bins.length || !map) return;
-
-      const closest = findClosestBins(location.lat, location.lng, bins, 5);
-
-      if (closest.length > 0) {
-        // Fit bounds to show user location and closest bins
-        const bounds = new google.maps.LatLngBounds();
-        bounds.extend({ lat: location.lat, lng: location.lng });
-        closest.forEach((b) => bounds.extend({ lat: b.lat, lng: b.lng }));
-        map.fitBounds(bounds, { top: 60, right: 40, bottom: 40, left: 40 });
-
-        // Select the closest bin
-        setSelectedBin(closest[0]);
-        setSelectedDistance(closest[0].distance);
-        setPanelOpen(true);
-      }
-    },
-    [bins, map],
-  );
 
   if (isLoading) {
     return (
@@ -126,7 +104,6 @@ function MapContent() {
             ),
           )}
         </Map>
-        <AddressSearch onPlaceSelect={handlePlaceSelect} />
       </div>
 
       <BinDetailPanel
